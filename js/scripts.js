@@ -12,7 +12,6 @@ function myTimer() {
   var data= '';
   var data2='';
   var coordinates = [];
-  var oceanMsg = 'The International Space Station is over the ocean.';
 
 
 
@@ -27,10 +26,11 @@ function myTimer() {
       coordinates = data.iss_position
       var latitude = data.iss_position.latitude;
       var longitude = data.iss_position.longitude;
-      url2 = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + latitude +'&lon=' + longitude;
+      url2 = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + 35.9209386 +'&lon=' + -79.1095029;
       console.log(url2);
 
       var issAddress = [];
+      var errorMsg = [];
 
       $.ajax({
         type: 'GET',
@@ -43,12 +43,13 @@ function myTimer() {
           issAddress = data2.address;
           console.log(issAddress);
           console.log(issAddress.country)
+          errorMsg = data2.error;
 
-          if (url2=data2.error='Unable to geocode'){
-              html += '<p> The International Space Station is over an ocean.</p>'
+          if (errorMsg='Unable to geocode'){
+              html += '<p> The International Space Station is over an ocean.</p>';
           }
           else{
-              html += '<p>' + issAddress.state + ', ' + issAddress.country + '</p>'
+              html += '<p>' + issAddress.state + ', ' + issAddress.country + '</p>';
           }
 
             $('#results').html(html)
