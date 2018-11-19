@@ -1,6 +1,11 @@
 $(function(){
   console.log('scripts loaded');
 
+  var myVar = setInterval(myTimer, 5000);
+
+function myTimer() {
+
+
   var url= 'http://api.open-notify.org/iss-now.json';
   var url2= '';
   var html= '';
@@ -24,7 +29,6 @@ $(function(){
       var longitude = data.iss_position.longitude;
       url2 = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + latitude +'&lon=' + longitude;
       console.log(url2);
-      html += latitude;
 
       var issAddress = [];
 
@@ -38,20 +42,27 @@ $(function(){
           console.log(data2);
           issAddress = data2.address;
           console.log(issAddress);
+          console.log(issAddress.country)
+          html += '<p>' + issAddress.state + ', ' + issAddress.country + '</p>';
+
+          if (issAddress.error='Unable to geocode'){
+            $('#results').html(oceanMsg)
+          }
+
+          $('#results').html(html)
+
         }// close second success
 
       });//close second ajax
-      $('#results').html(html)
 
-      /*if (issAddress='undefined'){
-        $('#results').html(oceanMsg);
-      }*/
+
+
 
     }// close first success
 
   }); // close first ajax
 
 
-
+}// close timer function
 
 });// close wrapper
