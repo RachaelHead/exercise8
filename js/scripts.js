@@ -45,7 +45,7 @@ function myTimer() {
           console.log(issAddress.country)
           html += '<p>' + issAddress.state + ', ' + issAddress.country + '</p>';
 
-          if (issAddress.error='Unable to geocode'){
+          if (data2.error='Unable to geocode'){
             $('#results').html(oceanMsg)
           }
 
