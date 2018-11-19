@@ -30,7 +30,6 @@ function myTimer() {
       console.log(url2);
 
       var issAddress = [];
-      var errorMsg = [];
 
       $.ajax({
         type: 'GET',
@@ -42,7 +41,6 @@ function myTimer() {
           console.log(data2);
           issAddress = data2.address;
           console.log(issAddress);
-          errorMsg = data2.error;
 
           if (url2=data2.error){
               console.log('ISS is over the ocean');
@@ -50,26 +48,14 @@ function myTimer() {
           }
           else{
               console.log('ISS is over land');
-              html += '<p>' + issAddress.state + ', ' + issAddress.country + '</p>';
+              html += '<p>The International Space Station is over ' + issAddress.state + ', ' + issAddress.country + '.</p>';
           }
-
-          /*if (data.address!=undefined && data.address.country!=undefined){
-            html += '<p>' + issAddress.state + ', ' + issAddress.country + '</p>';
-          }
-          else{
-              console.log('ISS is over the ocean')
-              html += '<p> The International Space Station is over an ocean.</p>';
-          }*/
-
-
 
             $('#results').html(html)
 
         }// close second success
 
       });//close second ajax
-
-
 
 
     }// close first success
