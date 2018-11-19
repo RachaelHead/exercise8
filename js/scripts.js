@@ -35,23 +35,33 @@ function myTimer() {
       $.ajax({
         type: 'GET',
         url: url2,
-        data: data2,
+        data: data,
         dataType: 'json',
         async: true,
-        success: function (data2){
-          console.log(data2);
-          issAddress = data2.address;
+        success: function (data){
+          console.log(data);
+          issAddress = data.address;
           console.log(issAddress);
           console.log(issAddress.country)
-          errorMsg = data2.error;
+          errorMsg = data.error;
 
-          if (data2=undefined){
+          /*if (data2.issAddress.country=undefined){
               console.log('ISS is over the ocean')
               html += '<p> The International Space Station is over an ocean.</p>';
           }
           else{
               html += '<p>' + issAddress.state + ', ' + issAddress.country + '</p>';
+          }*/
+
+          if (data.address!=undefined && data.address.country!=undefined){
+            html += '<p>' + issAddress.state + ', ' + issAddress.country + '</p>';
           }
+          else{
+              console.log('ISS is over the ocean')
+              html += '<p> The International Space Station is over an ocean.</p>';
+          }
+
+
 
             $('#results').html(html)
 
