@@ -10,7 +10,7 @@ function myTimer() {
   var url2= '';
   var html= '';
   var data= '';
-  var data2='';
+  var data2=[];
   var coordinates = [];
 
 
@@ -26,7 +26,7 @@ function myTimer() {
       coordinates = data.iss_position
       var latitude = data.iss_position.latitude;
       var longitude = data.iss_position.longitude;
-      url2 = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + 35.9209386 +'&lon=' + -79.1095029;
+      url2 = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + latitude +'&lon=' + longitude;
       console.log(url2);
 
       var issAddress = [];
@@ -45,7 +45,8 @@ function myTimer() {
           console.log(issAddress.country)
           errorMsg = data2.error;
 
-          if (errorMsg='Unable to geocode'){
+          if (data2=undefined){
+              console.log('ISS is over the ocean')
               html += '<p> The International Space Station is over an ocean.</p>';
           }
           else{
